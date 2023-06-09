@@ -1,0 +1,233 @@
+<script>
+
+// 17. Kill K-th Bit
+function solution(n, k) {
+    return parseInt(n.toString(2).slice(0, n.toString(2).length - k) + 0 +
+                    n.toString(2).slice(n.toString(2).length - k + 1), 2);
+}
+
+function solution(n, k) {                               // simple solution
+    let nBased2 = n.toString(2);
+    let indexToChange = nBased2.length - k;
+    let nChanged = nBased2.slice(0, indexToChange) + 0 
+                 + nBased2.slice(indexToChange + 1);
+    let solution = parseInt(nChanged, 2);
+  
+    return solution;
+}
+
+
+
+
+// 18. Array Packing
+function solution(a) {
+    let aReversed = a.reverse();
+    let M = '';
+    
+    for (let i = 0; i < aReversed.length; i++) {
+        let aiTo2 = aReversed[i].toString(2);
+
+        while (aiTo2.length < 8) {
+            aiTo2 = 0 + aiTo2;
+        }
+
+        M += aiTo2;
+    }
+
+    return parseInt(M, 2);
+    
+}
+
+
+
+
+// 19. Range Bit Count
+function solution(a, b) {
+    const ab = [];
+    let k = 0;
+    
+    for (a; a <= b; a++) {
+        ab.push(a.toString(2));
+    }
+    
+    for (let i = 0; i < ab.length; i++) {
+        for (let j = 0; j < ab[i].length; j++) {
+            if (ab[i][j] == 1) {
+                k++;
+            }
+        }
+    }
+    
+    return k;
+}
+
+function solution(a, b) {                       // good variant
+    let packed = "";
+
+    while(a <= b){
+        packed += a.toString(2);
+        a++;
+    }
+
+    return packed.split('1').length-1;
+}
+
+
+
+
+// 20. Mirror Bits
+function solution(a) {
+    return parseInt(a
+            .toString(2)
+            .split('')
+            .reverse()
+            .join(''), 2);
+}
+
+function solution(a) {                          // simple solution
+    let aTo2 = a.toString(2);
+    let aToArr = aTo2.split('');
+    let aRev = aToArr.reverse();
+    let aJoin = aRev.join('');
+    let aBack = parseInt(aJoin, 2);
+    
+    return aBack;
+}
+
+
+
+
+// 21. Second-Rightmost Zero Bit
+function solution(n) {
+  return 2 ** n.toString(2).split('').reverse().join('').replace(0, 2).indexOf(0);
+}
+
+function solution(n) {                          // simple solution; 'denoted by ellipses'
+    let nTo2 = n.toString(2).split('').reverse().join('');
+    let k = 1;
+    let pow = 0;
+    
+    for (let i = 0; i < nTo2.length; i++) {
+        if (nTo2[i] === '0') {
+            if (k === 0) {
+                pow = 2 ** i;
+            }
+            
+            k--;
+        }
+    }
+    
+    return pow;
+}
+
+
+
+
+// 22. Swap Adjacent Bits
+function solution(n) {
+  return (
+    function() {
+      let nTo2 = n.toString(2).split('');
+      let mTo2 = [];
+      let m = 0;
+      
+      if (nTo2.length % 2 === 1) {
+        nTo2.unshift('0');
+      }
+      
+      for (let i = 0; i < nTo2.length; i += 2) {
+        mTo2[i] = nTo2[i + 1];
+        mTo2[i + 1] = nTo2[i];
+      }
+      
+      m = parseInt(mTo2.join(''), 2);
+      
+      
+      return m;
+    }
+  )(n);
+}
+
+function solution(n) {                          // simple solution; 'denoted by ellipses'
+    let nTo2 = n.toString(2).split('');
+    let mTo2 = [];
+    let m = 0;
+
+    if (nTo2.length % 2 === 1) {
+        nTo2.unshift('0');
+    }
+
+    for (let i = 0; i < nTo2.length; i += 2) {
+        mTo2[i] = nTo2[i + 1];
+        mTo2[i + 1] = nTo2[i];
+    }
+
+    m = parseInt(mTo2.join(''), 2);
+
+    return m;
+}
+
+
+
+
+// 23. Different Rightmost Bit
+function solution(n, m) {
+  return (function() {
+    let nTo2 = n.toString(2);
+    let mTo2 = m.toString(2);
+    let k = 0;
+    
+    if (nTo2.length < mTo2.length) {
+        while (nTo2.length < mTo2.length) {
+            nTo2 = 0 + nTo2;
+        }
+    }
+    if (nTo2.length > mTo2.length) {
+        while (nTo2.length > mTo2.length) {
+            mTo2 = 0 + mTo2;
+        }
+    }
+    
+    for (let i = nTo2.length - 1; i >= 0; i--) {
+        if (nTo2[i] === mTo2[i]) {
+            k++;
+        } else break;
+    }
+    
+    return 2 ** k;
+  }) (n, m);
+}
+
+
+
+
+// 24. Equal Pair of Bits
+function solution(n, m) {
+  return (function() {
+    let nTo2 = n.toString(2);
+    let mTo2 = m.toString(2);
+    let k = 0;
+    
+    if (nTo2.length < mTo2.length) {
+        while (nTo2.length < mTo2.length) {
+            nTo2 = 0 + nTo2;
+        }
+    }
+    if (nTo2.length > mTo2.length) {
+        while (nTo2.length > mTo2.length) {
+            mTo2 = 0 + mTo2;
+        }
+    }
+    
+    for (let i = nTo2.length - 1; i >= 0; i--) {
+        if (nTo2[i] !== mTo2[i]) {
+            k++;
+        } else break;
+    }
+    
+    return 2 ** k;
+  }) (n, m);
+}
+
+
+</script>

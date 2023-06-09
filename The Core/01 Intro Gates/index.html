@@ -1,0 +1,108 @@
+<script>
+
+// 1. Add Two Digits
+function solution(n) {
+    return (n - n % 10) / 10 + n % 10;
+}
+
+
+
+// 2. Largest Number
+function solution(n) {
+    let sol = '';
+    
+    for(i = 1; i <= n; i++) {
+        sol += 9;
+    }
+
+    return +sol;
+}
+
+function solution(n) {          // 2-nd variant
+    return Math.pow(10, n) - 1;
+}
+
+function solution(n) {          // 3-rd variant
+    return 10 ** n - 1;
+}
+
+
+
+
+// 3. Candies
+function solution(n, m) {
+    return m - m % n;
+}
+
+
+
+
+// 4. Seats in Theater
+function solution(nCols, nRows, col, row) {
+    return (nCols - col + 1) * (nRows - row);
+}
+
+
+
+
+// 5. Max Multiple
+function solution(divisor, bound) {
+    let N = Math.trunc(bound / divisor) * divisor;
+    return N;
+}
+
+function solution(divisor, bound) {          //  2nd variant
+return bound - bound % divisor;
+}
+
+
+
+
+// 6. Circle of Numbers
+function solution(n, firstNumber) {
+    if (firstNumber < n / 2) {
+        return firstNumber + n / 2;
+    }
+    else {
+        return firstNumber - n / 2;
+    }
+}
+
+const solution = (n, firstNumber) =>            // 2nd variant; ???
+  (firstNumber + n / 2) % n;
+
+
+
+
+// 7. Late Ride
+function solution(n) {
+    let mm = n % 60;
+    let hh = (n - mm) / 60;
+    let sum = Math.trunc(hh / 10) + hh % 10 + 
+              Math.trunc(mm / 10) + mm % 10
+              
+    return sum;
+}
+
+function solution(n) {                          // 2nd variant; | ???
+    var hours = n / 60 | 0,
+        minutes = n % 60;
+    return (hours / 10 | 0) + hours % 10 + (minutes / 10 | 0) + minutes % 10;
+}
+
+
+
+
+// 8. Phone Call
+function solution(min1, min2_10, min11, s) {
+    if (s < min1) {
+        return Math.trunc(s / min1);
+    } else if (s < min1 + 9 * min2_10) {
+        return Math.trunc((s - min1) / min2_10) + 1
+    } else {
+        return Math.trunc((s - min1 - 9 * min2_10) / min11) + 10
+    }
+}
+
+
+</script>

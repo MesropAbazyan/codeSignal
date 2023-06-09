@@ -1,0 +1,107 @@
+<script>
+
+// 19. areEquallyStrong
+function solution(yourLeft, yourRight, friendsLeft, friendsRight) {
+    return yourLeft === friendsLeft && yourRight === friendsRight ||
+           yourLeft === friendsRight && yourRight === friendsLeft;
+}
+
+function solution(yourLeft, yourRight, friendsLeft, friendsRight) {         // good variant
+    let me = [yourLeft, yourRight].sort().join("");
+    let friend = [friendsLeft, friendsRight].sort().join("");
+    
+    return me === friend;
+}
+
+function solution(yourLeft, yourRight, friendsLeft, friendsRight) {         // good variant
+    return Math.max(yourLeft, yourRight) === Math.max(friendsLeft, friendsRight) && 
+           Math.min(yourLeft, yourRight) === Math.min(friendsLeft, friendsRight)
+}
+
+
+
+
+// 20. arrayMaximalAdjacentDifference
+function solution(inputArray) {
+    let diffArr = [];
+    
+    for (let i = 0; i < inputArray.length - 1; i++) {
+        diffArr.push( Math.abs(inputArray[i + 1] - inputArray[i]) );
+    }
+     
+    return Math.max(...diffArr);
+}
+
+function solution(inputArray) {                     // simple solution
+    let diffArr = [];
+    
+    for (let i = 0; i < inputArray.length - 1; i++) {
+        diffArr.push(inputArray[i + 1] - inputArray[i]);
+        
+        if (diffArr[i] < 0) {
+            diffArr[i] = -diffArr[i];
+        }
+    }
+     
+    return Math.max(...diffArr);
+}
+
+
+
+
+// 21. isIPv4Address
+function solution(inputString) {
+    let quads = inputString.split('.');
+    let k = 0;
+    
+    if (quads.length === 4) {
+        for (let i = 0; i < quads.length; i++) {
+            if (
+                isNaN(quads[i]) || 
+                quads[i].length !== Number(quads[i]).toString().length || 
+                quads[i] > 255
+            ) k++;
+        }
+        
+        return k === 0;
+    } else return false;
+}
+
+
+
+
+// 22. avoidObstacles
+function solution(inputArray) {
+    let sortedArray = inputArray.sort((a, b) => a - b);
+    let holesArray = [];
+    let hole = 2;
+
+    for (let h = 2; h <= Math.max(...sortedArray) + 1; h++) {
+        if (!sortedArray.includes(h)) {
+            holesArray.push(h);
+        }
+        
+        for (let s = 0, h = 0; s < sortedArray.length; s++) {
+            if (sortedArray[s] % holesArray[h] === 0) {
+                holesArray.splice(h, 1);
+            }
+        }
+    }
+
+    hole = holesArray[0];
+
+    return hole;
+}
+
+function solution(inputArray) {                 // good variant
+    let jump = 2;
+
+    while (inputArray.some(hole => hole % jump === 0)) {
+        jump++;
+    }
+
+    return jump;
+}
+
+
+</script>

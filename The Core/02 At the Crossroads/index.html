@@ -1,0 +1,155 @@
+<script>
+
+// 9. Reach Next Level
+function solution(experience, threshold, reward) {
+    if (experience + reward >= threshold) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+
+
+// 10. Knapsack Light
+function solution(value1, weight1, value2, weight2, maxW) {
+    if (maxW >= weight1 + weight2) {
+        return value1 + value2;
+    } else if (maxW >= weight1 && maxW >= weight2) {
+        if (value1 >= value2) {
+            return value1;
+        } else {
+            return value2;
+        }
+    } else if (maxW >= weight1 && maxW < weight2) {
+        return value1;
+    } else if (maxW >= weight2 && maxW < weight1) {
+        return value2;
+    } else {
+        return 0;
+    }
+}
+
+
+
+
+// 11. Extra Number
+function solution(a, b, c) {
+    if (a == b) {
+        return c;
+    } else if (a == c) {
+        return b;
+    } else {
+        return a;
+    }
+}
+
+
+
+
+// 12. Is Infinite Process?
+function solution(a, b) {
+    if (a <= b && (a - b) % 2 == 0) return false;
+    else return true;
+}
+
+function solution(a, b) {                           // simple solution
+    if (a === b) return false;
+    if (a  >  b) return true;
+    if (a  <  b) {
+        while (a < b) {
+            a++;
+            b--;
+        }
+        if (a  >  b) return true;
+        if (a === b) return false;
+    }
+}
+
+
+
+
+// 13. Arithmetic Expression
+function solution(a, b, c) {
+    if (a + b === c || 
+        a - b === c || 
+        a * b === c || 
+        a / b === c) {
+        return true;
+    } else if (a + b !== c && 
+               a - b !== c && 
+               a * b !== c && 
+               a / b !== c) {
+        return false;
+    }
+}
+
+function solution(a, b, c) {                        // 2nd variant
+    return (a + b === c || 
+        a - b === c || 
+        a * b === c || 
+        a / b === c);
+}
+
+function solution(a, b, c) {                        // good variant
+    return [a + b, a - b, a * b, a / b].includes(c);
+}
+
+
+
+
+// 14. Tennis Set
+function solution(score1, score2) {
+    return score1 === 6 && score2 < 5 ||
+           score1 === 7 && (score2 === 5 || score2 === 6) || 
+           score2 === 6 && score1 < 5 || 
+           score2 === 7 && (score1 === 5 || score1 === 6)
+}
+
+function solution(score1, score2) {                 // good variant
+    var max = Math.max(score1, score2),
+        min = Math.min(score1, score2);
+    return  (max == 6 && min < 5) || (max == 7 && min >= 5 && min <=6); 
+}
+
+
+
+
+// 15. Will You?
+function solution(young, beautiful, loved) {
+    return (young == true && beautiful == true && loved == false) || 
+           ((young == false || beautiful == false) && loved == true)
+}
+
+function solution(young, beautiful, loved) {                // good variant
+    return (young && beautiful) != loved;
+}
+
+
+
+
+// 16. Metro Card
+function solution(lastNumberOfDays) {
+    const arr = [];
+    
+    if (lastNumberOfDays === 28 || lastNumberOfDays === 30) {
+        arr.push(31);
+    } else {
+        arr.push(28, 30, 31);
+    }
+    
+    return arr;
+}
+
+function solution(lastNumberOfDays) {                       // good variant
+    let result = {
+        30: [31],
+        28: [31],
+        31: [28, 30, 31]
+    };
+    return result[lastNumberOfDays];
+}
+
+
+</script>

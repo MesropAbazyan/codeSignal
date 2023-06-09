@@ -1,0 +1,156 @@
+<script>
+
+// 9. All Longest Strings
+function solution(inputArray) {                     // simple solution
+    const longStrArr = [];
+    let longStr = inputArray[0].length;
+    
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i].length > longStr) {
+            longStr = inputArray[i].length;
+        }
+    }
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i].length === longStr) {
+            longStrArr.push(inputArray[i]);
+        }
+    }
+    
+    return longStrArr;
+}
+
+function solution(inputArray) {                     // 2nd variant
+    let longStrArr = [];
+    let longStr = inputArray[0];
+    
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i].length === longStr.length) {
+            longStrArr.push(inputArray[i]);
+        } else if (inputArray[i].length > longStr.length) {
+            longStr = inputArray[i];
+            longStrArr = [longStr];
+        }
+    }
+    
+    return longStrArr;
+}
+
+
+
+
+// 10. commonCharacterCount
+function solution(s1, s2) {
+    let k = 0;
+    
+    for (let i = 0; i < s1.length; i++) {
+        for (let j = 0; j < s2.length; j++) {
+            if (s1[i] === s2[j]) {
+                s1 = s1.replace(s1[i], 1);
+                s2 = s2.replace(s2[j], 2);
+                k++;
+            }
+        }
+    }
+    
+    return k;
+}
+
+
+
+
+// 11. isLucky
+function solution(n) {
+    let kFirstHalf = 0;
+    let kSecondHalf = 0;
+    
+    n = '' + n;
+    
+    for (let i = 0; i < n.length / 2; i++) {
+        kFirstHalf += +n[i];
+    }
+    for (let i = n.length / 2; i < n.length; i++) {
+        kSecondHalf += +n[i];
+    }
+    
+    return (kFirstHalf === kSecondHalf);
+}
+
+
+
+
+// 12. Sort by Height
+function solution(a) {
+    const trees = [];
+    
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] === -1) {
+            delete a[i];
+            trees.push(i);
+        }
+    }
+
+    a.sort( function(a, b) {return a - b} );
+
+    for (let i = 0; i < trees.length; i++) {
+        a.splice(trees[i], 0, -1);
+        a.pop();
+    }
+    
+    return a;
+}
+
+
+
+
+// 13. reverseInParentheses
+function solution(inputString) {
+    let inputArray = inputString.split('');
+    let openPar = [];
+    let closePar = [];
+    let reversed = [];
+    let alreadyUsed = [];
+    
+    for (let i = 0; i < inputArray.length; i++) {
+        if (inputArray[i] === '(') {
+            openPar.push(i);
+        }
+        if (inputArray[i] === ')') {
+            closePar.push(i);
+        }
+    }
+    
+    for (let c = 0; c < closePar.length; c++) {
+        let o = 0;
+
+        while (openPar[o] < closePar[c]) {
+            o++;
+
+            if (openPar[o] > closePar[c] || !openPar[o]) {
+                o--;
+
+                for (let u = 0; u < alreadyUsed.length; u++) {
+                    if (openPar[o] === alreadyUsed[u]) {
+                        o--;
+                    }
+                }
+
+                reversed = inputArray.slice(openPar[o] + 1, closePar[c]).reverse();
+                inputArray = inputArray.slice(0, openPar[o] + 1)
+                                .concat(reversed, inputArray.slice(closePar[c]));
+                alreadyUsed.push(openPar[o]);
+                alreadyUsed.sort((a, b) => b - a);
+                delete inputArray[openPar[o]];
+                delete inputArray[closePar[c]];
+                o = 0;
+                c++;
+            }
+        }
+    }
+
+    inputString = inputArray.join('');
+    
+    return inputString;
+}
+
+
+</script>
